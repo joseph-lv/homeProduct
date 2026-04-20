@@ -5,7 +5,7 @@ import { topNav, socialLinks } from '@/data/menu'
 import SocialIcon from '@/components/icons/SocialIcon.vue'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import { useI18n } from '@/i18n'
-import logoImage from '@/assets/images/logo.jpg'
+import logoImage from '@/assets/images/Log2.png'
 
 const searchOpen = ref(false)
 const mobileOpen = ref(false)
@@ -79,7 +79,7 @@ function submitSearch() {
         <img
           :src="logoImage"
           alt="CassieHome Tools"
-          class="h-9 w-auto max-w-[min(100%,220px)] md:h-10"
+          class="h-8 w-auto max-w-[min(100%,320px)] md:h-9"
         />
       </RouterLink>
 
