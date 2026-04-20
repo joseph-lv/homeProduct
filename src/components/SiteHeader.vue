@@ -5,6 +5,7 @@ import { topNav, socialLinks } from '@/data/menu'
 import SocialIcon from '@/components/icons/SocialIcon.vue'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import { useI18n } from '@/i18n'
+import logoImage from '@/assets/images/logo.jpg'
 
 const searchOpen = ref(false)
 const mobileOpen = ref(false)
@@ -76,11 +77,9 @@ function submitSearch() {
       </div>
       <RouterLink to="/" class="shrink-0" @click="closeMobile">
         <img
-          src="https://lajtulipshouse.com/wp-content/uploads/2025/03/lajhouse-logo-1.png"
-          alt="lajtulipshouse.com"
-          class="h-8 w-auto max-w-[min(100%,280px)] md:h-9"
-          width="249"
-          height="22"
+          :src="logoImage"
+          alt="CassieHome Tools"
+          class="h-9 w-auto max-w-[min(100%,220px)] md:h-10"
         />
       </RouterLink>
 
@@ -96,16 +95,16 @@ function submitSearch() {
               >
                 {{ t(`common.${item.key}`) }}
               </RouterLink>
-              <div v-else class="flex items-center gap-0.5">
-                <RouterLink to="/products" class="nav-link">{{ t('common.products') }}</RouterLink>
+              <div v-else class="flex items-center gap-0.5 text-sm leading-none">
+                <RouterLink to="/products" class="nav-link leading-none">{{ t('common.products') }}</RouterLink>
                 <button
                   type="button"
-                  class="flex h-6 w-6 items-center justify-center rounded border-0 bg-transparent p-0 text-text-primary outline-none ring-0 hover:text-black focus-visible:ring-1 focus-visible:ring-surface-border"
+                  class="flex h-5 w-5 self-center items-center justify-center rounded border-0 bg-transparent p-0 text-text-primary outline-none ring-0 hover:text-black focus-visible:ring-1 focus-visible:ring-surface-border"
                   aria-expanded="false"
                   :aria-label="t('header.productsSubmenu')"
                   tabindex="-1"
                 >
-                  <svg class="h-3 w-3" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <svg class="h-2.5 w-2.5" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                     <path
                       d="M1.5 4L6 8L10.5 4"
                       stroke="currentColor"
