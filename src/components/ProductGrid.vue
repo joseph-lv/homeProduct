@@ -29,7 +29,9 @@ const { t } = useI18n()
           height="675"
         />
       </RouterLink>
-      <h2 class="mt-4 text-sm font-medium leading-snug text-text-primary">
+      <h2
+        class="mt-4 min-h-40px text-sm font-medium leading-snug text-text-primary sm:min-h-[4rem]"
+      >
         <RouterLink :to="p.href" class="text-text-primary no-underline hover:underline">
           {{ p.title }}
         </RouterLink>

@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router'
 import SiteHeader from '@/components/SiteHeader.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import { useI18n } from '@/i18n'
+import productsBg from '@/assets/images/products.png'
 
 const { t } = useI18n()
 </script>
@@ -14,9 +15,7 @@ const { t } = useI18n()
     <section class="relative min-h-[220px] overflow-hidden md:min-h-[280px]">
       <div
         class="absolute inset-0 bg-cover bg-center"
-        style="
-          background-image: url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1920&q=80');
-        "
+        :style="{ backgroundImage: `url(${productsBg})` }"
       />
       <div class="absolute inset-0 bg-black/45" />
       <div class="relative mx-auto flex h-full min-h-[220px] max-w-7xl items-center px-4 md:min-h-[280px] md:px-6 lg:px-8">

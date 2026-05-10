@@ -1,3 +1,6 @@
+import catalogPlaceholder from '@/assets/images/products.png'
+import { spreadsheetProducts } from './spreadsheetCatalog'
+
 export interface ProductItem {
   id: number
   title: string
@@ -15,160 +18,47 @@ export interface ProductDetail extends ProductItem {
   features: string[]
 }
 
-/** Seed products from reference site */
-const seedProducts: ProductItem[] = [
-  {
-    id: 2194,
-    title: 'Crystal Fireless Aromatherapy',
-    href: 'https://lajtulipshouse.com/product/crystal-fireless-aromatherapy/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Crystal-Fireless-Aromatherapy-4.jpg',
-  },
-  {
-    id: 2192,
-    title: 'Crystal Cup Fireless Aromatherapy',
-    href: 'https://lajtulipshouse.com/product/crystal-cup-fireless-aromatherapy/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Crystal-Cup-Fireless-Aromatherapy-3.jpg',
-  },
-  {
-    id: 2172,
-    title: 'Blue Ocean Fireless Aromatherapy',
-    href: 'https://lajtulipshouse.com/product/blue-ocean-fireless-aromatherapy/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Blue-Ocean-Fireless-Aromatherapy-3-1.jpg',
-  },
-  {
-    id: 2168,
-    title: 'Premium Leather Scented Candle',
-    href: 'https://lajtulipshouse.com/product/premium-leather-scented-candle/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Premium-Leather-Scented-Candle-1.jpg',
-  },
-  {
-    id: 2167,
-    title: 'Postbox scented candle',
-    href: 'https://lajtulipshouse.com/product/postbox-scented-candle/',
-    image: 'https://lajtulipshouse.com/wp-content/uploads/2025/04/Postbox-scented-candle-4.jpg',
-  },
-  {
-    id: 2165,
-    title: 'Smokeless Wood Wick Scented Candle',
-    href: 'https://lajtulipshouse.com/product/smokeless-wood-wick-scented-candle/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Smokeless-Wood-Wick-Scented-Candle-1.jpg',
-  },
-  {
-    id: 2163,
-    title: 'Tinplate cans scented candle',
-    href: 'https://lajtulipshouse.com/product/tinplate-cans-scented-candle/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Tinplate-cans-scented-candle-2.jpg',
-  },
-  {
-    id: 2160,
-    title: 'Wood Wick Scented Candle',
-    href: 'https://lajtulipshouse.com/product/wood-wick-scented-candle/',
-    image:
-      'https://lajtulipshouse.com/wp-content/uploads/2025/04/Wood-Wick-Scented-Candle-4-1024x1024.jpg',
-  },
-]
+/** Maps Excel 「大类目」to URL/query slug (see menu.ts). */
+const MAIN_CATEGORY_SLUGS: Record<string, string> = {
+  'Candle Care Tools': 'candle-care-tools',
+  'Packing&Printing': 'packing-printing',
+}
 
-/** Static mock products for pagination demo */
-const mockTitles = [
-  'Matte Black Candle Lighter',
-  'Nordic Glass Candle Jar',
-  'Vintage Brass Wick Trimmer',
-  'Aroma Diffuser Refill Set',
-  'Minimalist Candle Snuffer',
-  'Handcrafted Soy Wax Candle',
-  'Amber Decorative Candle Cup',
-  'Scented Travel Tin Candle',
-  'Natural Reed Diffuser Bottle',
-  'Premium Gift Box Packaging',
-  'Luxury Paper Box Collection',
-  'Garden Hand Pruning Shears',
-  'Fabric Lace Precision Scissors',
-  'Multi-use Household Garden Kit',
-  'Ceramic Candle Tray Set',
-  'Wedding Favor Candle Jar',
-  'Seasonal Fragrance Candle Series',
-  'Rechargeable USB Candle Lighter',
-  'Portable Wick Dipper Tool',
-  'Frosted Glass Diffuser Set',
-  'Eco-friendly Packaging Bundle',
-  'Home Decor Candle Holder',
-  'Classic Round Candle Tin',
-  'Deluxe Aromatherapy Gift Set',
-]
+function categorySlugForMain(main: string): string {
+  const slug = MAIN_CATEGORY_SLUGS[main]
+  if (!slug) {
+    console.warn(`[products] Unknown main category "${main}", falling back to candle-care-tools`)
+    return 'candle-care-tools'
+  }
+  return slug
+}
 
-const mockProducts: ProductItem[] = mockTitles.map((title, index) => {
-  const seed = seedProducts[index % seedProducts.length]
-  return {
-    id: 5000 + index,
-    title,
-    href: `/products/${5000 + index}`,
-    image: seed.image,
-  }
-})
+/** Matches submenu query keys, e.g. "candle tray" → candle-tray */
+function subCategoryLabelToSlug(label: string): string {
+  return label
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
 
-const categoryMap = [
-  {
-    category: 'candle-care-tools',
-    subs: [
-      'candle-tray',
-      'care-tools-set',
-      'candle-lighter',
-      'wick-dipper',
-      'candle-snuffer',
-      'wick-trimmer',
-      'candle-wick-clip',
-    ],
-  },
-  {
-    category: 'packing-printing',
-    subs: ['glass-packaging', 'paper-box'],
-  },
-  {
-    category: 'garden-household-tools',
-    subs: ['garden-tools', 'fabric-lace-scissors', 'garden-scissors'],
-  },
-] as const
+function stripDescriptionPrefix(notes: string): string {
+  return notes.replace(/^description[：:]\s*/i, '').trim()
+}
 
-export const products: ProductItem[] = [...seedProducts, ...mockProducts].map((item, index) => {
-  const group = categoryMap[index % categoryMap.length]
-  const sub = group.subs[index % group.subs.length]
-  return {
-    ...item,
-    href: `/products/${item.id}`,
-    categorySlug: group.category,
-    subCategorySlug: sub,
-  }
-})
-export const totalResults = products.length
-export const perPage = 8
-
-function inferCategory(title: string): string {
-  const lower = title.toLowerCase()
-  if (lower.includes('lighter') || lower.includes('wick') || lower.includes('snuffer') || lower.includes('tray')) {
-    return 'Candle Care Tools'
-  }
-  if (lower.includes('box') || lower.includes('packaging')) {
-    return 'Packing&Printing'
-  }
-  if (lower.includes('garden') || lower.includes('scissors') || lower.includes('pruning')) {
-    return 'Garden&Household Tools'
-  }
-  return 'Scent Candle'
+function descriptionFromRow(title: string, notes: string | null): string {
+  if (notes) return stripDescriptionPrefix(notes)
+  return `${title} — Professional wholesale offering from Lajtulips House. Contact us for catalogs, customization, and bulk pricing.`
 }
 
 function inferMaterial(title: string): string {
   const lower = title.toLowerCase()
   if (lower.includes('glass')) return 'Glass'
   if (lower.includes('tin')) return 'Tinplate'
-  if (lower.includes('paper') || lower.includes('box')) return 'Paper'
-  if (lower.includes('scissors') || lower.includes('metal') || lower.includes('lighter')) return 'Stainless Steel'
-  return 'Mixed Materials'
+  if (lower.includes('paper') || lower.includes('packaging') || lower.includes('box')) return 'Paper / board'
+  if (lower.includes('scissors') || lower.includes('metal') || lower.includes('steel')) return 'Stainless Steel'
+  return 'Mixed materials'
 }
 
 function inferFeatures(title: string): string[] {
@@ -176,27 +66,57 @@ function inferFeatures(title: string): string[] {
   if (lower.includes('lighter')) {
     return ['Windproof flame', 'Refillable design', 'Ergonomic grip']
   }
-  if (lower.includes('jar') || lower.includes('cup')) {
-    return ['Heat-resistant body', 'Reusable container', 'Gift-friendly style']
+  if (lower.includes('jar') || lower.includes('cup') || lower.includes('tray')) {
+    return ['Heat-resistant body', 'Reusable styling', 'Gift-friendly look']
   }
   if (lower.includes('packaging') || lower.includes('box')) {
     return ['Custom logo support', 'Protective structure', 'Eco-friendly options']
   }
-  if (lower.includes('scissors') || lower.includes('pruning')) {
-    return ['Sharp precision blades', 'Durable construction', 'Comfort handle']
+  if (lower.includes('scissors') || lower.includes('trimmer') || lower.includes('wick')) {
+    return ['Clean, precise cut', 'Durable metal build', 'Comfortable handling']
   }
-  return ['Premium finish', 'Stable quality', 'Suitable for bulk orders']
+  if (lower.includes('snuffer') || lower.includes('dipper')) {
+    return ['Safe flame control', 'Matching candle-care aesthetic', 'Long-lasting finish']
+  }
+  return ['Premium finish', 'Stable quality', 'Suitable for wholesale programs']
 }
 
-export const productDetails: ProductDetail[] = products.map((item) => ({
-  ...item,
-  sku: `LJH-${item.id}`,
-  category: inferCategory(item.title),
-  material: inferMaterial(item.title),
-  description:
-    `Designed for export-focused wholesale buyers, ${item.title} combines practical use with a clean visual style. ` +
-    'It fits both retail-ready packaging programs and custom private label projects.',
-  features: inferFeatures(item.title),
+function materialFromNotes(notes: string | null, title: string): string {
+  if (notes) {
+    const m = notes.match(/Material[：:]\s*([^\n]+)/i)
+    if (m) return m[1].trim()
+  }
+  return inferMaterial(title)
+}
+
+function featuresFromNotes(notes: string | null, title: string): string[] {
+  if (notes) {
+    const body = stripDescriptionPrefix(notes)
+    const lines = body.split('\n').map((l) => l.trim()).filter(Boolean)
+    if (lines.length) return lines
+  }
+  return inferFeatures(title)
+}
+
+export const products: ProductItem[] = spreadsheetProducts.map((row) => ({
+  id: row.id,
+  title: row.title,
+  href: `/products/${row.id}`,
+  image: row.imagePublicPath ?? catalogPlaceholder,
+  categorySlug: categorySlugForMain(row.mainCategory),
+  subCategorySlug: subCategoryLabelToSlug(row.subCategoryLabel),
+}))
+
+export const totalResults = products.length
+export const perPage = 8
+
+export const productDetails: ProductDetail[] = spreadsheetProducts.map((row, index) => ({
+  ...products[index],
+  sku: `LJH-${row.id}`,
+  category: row.mainCategory,
+  material: materialFromNotes(row.detailNotes, row.title),
+  description: descriptionFromRow(row.title, row.detailNotes),
+  features: featuresFromNotes(row.detailNotes, row.title),
 }))
 
 export function getProductDetailById(id: number): ProductDetail | undefined {

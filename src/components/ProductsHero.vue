@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from '@/i18n'
+import productsBg from '@/assets/images/products.png'
 
 const { t } = useI18n()
 const props = defineProps<{
@@ -17,9 +18,7 @@ const heading = computed(() => props.title || t('common.allProducts'))
   >
     <div
       class="absolute inset-0 bg-cover bg-center"
-      style="
-        background-image: url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1920&q=80');
-      "
+      :style="{ backgroundImage: `url(${productsBg})` }"
     />
     <div class="absolute inset-0 bg-black/35 backdrop-blur-[2px]" />
     <h1
