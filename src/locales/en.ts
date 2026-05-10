@@ -21,13 +21,13 @@ export default {
     productsSubmenu: 'Products submenu',
   },
   footer: {
-    slogan: 'Discover Elegance and Quality at Lajtulips House',
+    slogan: 'Discover quality candle-care tools at CassieHome Tools.',
     learnMore: 'Learn more',
     getInTouch: 'Get in touch',
     copyright: '©2026 CassieHome Tools. All rights reserved.',
   },
   home: {
-    intro: 'Welcome to Lajtulips House — browse our full catalog on the products page.',
+    intro: 'Welcome to CassieHome Tools — browse our full catalog on the products page.',
     cta: 'View all products',
   },
   productsPage: {
@@ -46,7 +46,7 @@ export default {
     relatedProducts: 'Related Products',
   },
   about: {
-    heroTag: 'LAJTULIPS HOUSE',
+    heroTag: 'CASSIEHOME TOOLS',
     title: 'About Us',
     heading: 'Our Story',
     p1: 'We started out as an established metal scissor factory, focused on high-end hardware craftsmanship. But our love for scented candles began with a trip to Europe — and after that, we were hooked on the soft, gentle beauty of candlelight living.',

@@ -21,13 +21,13 @@ export default {
     productsSubmenu: '产品子菜单',
   },
   footer: {
-    slogan: '探索 Lajtulips House 的品质与美感',
+    slogan: '在 CassieHome Tools 探索蜡烛护理工具的品质与美感。',
     learnMore: '了解更多',
     getInTouch: '联系方式',
     copyright: '©2026 CassieHome Tools 保留所有权利。',
   },
   home: {
-    intro: '欢迎来到 Lajtulips House，可前往产品页面浏览完整目录。',
+    intro: '欢迎来到 CassieHome Tools，可前往产品页面浏览完整目录。',
     cta: '查看全部产品',
   },
   productsPage: {
@@ -46,7 +46,7 @@ export default {
     relatedProducts: '相关推荐',
   },
   about: {
-    heroTag: 'LAJTULIPS HOUSE',
+    heroTag: 'CASSIEHOME TOOLS',
     title: '关于我们',
     heading: '我们的故事',
     p1:

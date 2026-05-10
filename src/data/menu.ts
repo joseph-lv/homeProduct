@@ -53,14 +53,15 @@ export const topNav: TopNavItem[] = [
   { key: 'contactUs', href: '/contact-us' },
 ]
 
+/** Placeholder profile URLs for CassieHome Tools (header uses buttons + construction notice until links go live). */
 export const socialLinks = [
-  { href: 'https://www.tiktok.com/@lajtulipshouse1', label: 'TikTok', icon: 'tiktok' as const },
-  { href: 'https://www.facebook.com/lajtulipshouse2', label: 'Facebook', icon: 'facebook' as const },
-  { href: 'https://www.instagram.com/laj_tulipshouse/', label: 'Instagram', icon: 'instagram' as const },
+  { href: 'https://www.tiktok.com/@cassiehometools', label: 'TikTok', icon: 'tiktok' as const },
+  { href: 'https://www.facebook.com/cassiehometools', label: 'Facebook', icon: 'facebook' as const },
+  { href: 'https://www.instagram.com/cassiehometools/', label: 'Instagram', icon: 'instagram' as const },
   {
-    href: 'https://www.linkedin.com/company/laj-tulips-house/posts/?feedView=all',
+    href: 'https://www.linkedin.com/company/cassiehometools/',
     label: 'LinkedIn',
     icon: 'linkedin' as const,
   },
-  { href: 'https://www.youtube.com/@lajtulipshouse', label: 'YouTube', icon: 'youtube' as const },
+  { href: 'https://www.youtube.com/@cassiehometools', label: 'YouTube', icon: 'youtube' as const },
 ]

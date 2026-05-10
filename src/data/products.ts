@@ -49,7 +49,7 @@ function stripDescriptionPrefix(notes: string): string {
 
 function descriptionFromRow(title: string, notes: string | null): string {
   if (notes) return stripDescriptionPrefix(notes)
-  return `${title} — Professional wholesale offering from Lajtulips House. Contact us for catalogs, customization, and bulk pricing.`
+  return `${title} — Professional wholesale offering from CassieHome Tools. Contact us for catalogs, customization, and bulk pricing.`
 }
 
 function inferMaterial(title: string): string {
@@ -112,7 +112,7 @@ export const perPage = 8
 
 export const productDetails: ProductDetail[] = spreadsheetProducts.map((row, index) => ({
   ...products[index],
-  sku: `LJH-${row.id}`,
+  sku: `CHT-${row.id}`,
   category: row.mainCategory,
   material: materialFromNotes(row.detailNotes, row.title),
   description: descriptionFromRow(row.title, row.detailNotes),
