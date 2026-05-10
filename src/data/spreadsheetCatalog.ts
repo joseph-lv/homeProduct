@@ -1,4 +1,4 @@
-/** Auto-generated from data/产品清单.xlsx — run: py -3 scripts/sync-product-catalog.py */
+/** Auto-generated catalog — re-import with: py -3 scripts/sync-product-catalog.py <path-to-catalog.xlsx> */
 
 export interface SpreadsheetProductRow {
   id: number

@@ -23,6 +23,14 @@ body {
     sans-serif;
 }
 
+.font-brand-wordmark {
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    'Times New Roman',
+    serif;
+}
+
 a {
   color: inherit;
 }

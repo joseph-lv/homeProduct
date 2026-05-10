@@ -1,17 +1,18 @@
 """
-Regenerate src/data/spreadsheetCatalog.ts from data/产品清单.xlsx.
+Regenerate src/data/spreadsheetCatalog.ts from a product catalog Excel file.
 
 - Forward-fills the 「描述」 column (merged / blank rows inherit the previous description).
 - Extracts embedded pictures from column E into public/catalog/p-{id}.png.
 
 Usage (from project root):
-  py -3 scripts/sync-product-catalog.py
+  py -3 scripts/sync-product-catalog.py <path-to-your-catalog.xlsx>
 """
 
 from __future__ import annotations
 
 import json
 import shutil
+import sys
 import zipfile
 from collections import defaultdict
 from pathlib import Path
@@ -20,7 +21,6 @@ from xml.etree import ElementTree as ET
 import openpyxl
 
 ROOT = Path(__file__).resolve().parents[1]
-XLSX = ROOT / "data" / "产品清单.xlsx"
 OUT = ROOT / "src" / "data" / "spreadsheetCatalog.ts"
 CATALOG_DIR = ROOT / "public" / "catalog"
 
@@ -104,13 +104,13 @@ def extract_cover(xlsx: Path, media_basename: str, dest: Path) -> None:
     dest.write_bytes(data)
 
 
-def parse_products() -> list[dict]:
-    wb = openpyxl.load_workbook(XLSX, read_only=True, data_only=True)
+def parse_products(xlsx: Path) -> list[dict]:
+    wb = openpyxl.load_workbook(xlsx, read_only=True, data_only=True)
     ws = wb.active
     rows = list(ws.iter_rows(values_only=True))
     wb.close()
 
-    row_to_media = drawing_row_to_media_basename(XLSX)
+    row_to_media = drawing_row_to_media_basename(xlsx)
 
     curr_main = None
     curr_sub = None
@@ -151,7 +151,7 @@ def parse_products() -> list[dict]:
         if media_base:
             dest = CATALOG_DIR / f"p-{pid}.png"
             try:
-                extract_cover(XLSX, media_base, dest)
+                extract_cover(xlsx, media_base, dest)
                 image_public_path = f"/catalog/p-{pid}.png"
             except KeyError:
                 print(f"Warning: {media_base} missing in xlsx for product {pid}")
@@ -172,7 +172,7 @@ def parse_products() -> list[dict]:
 
 def emit_ts(products: list[dict]) -> None:
     lines = [
-        "/** Auto-generated from data/产品清单.xlsx — run: py -3 scripts/sync-product-catalog.py */",
+        "/** Auto-generated — run: py -3 scripts/sync-product-catalog.py <path-to-catalog.xlsx> */",
         "",
         "export interface SpreadsheetProductRow {",
         "  id: number",
@@ -209,6 +209,14 @@ def emit_ts(products: list[dict]) -> None:
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        raise SystemExit(
+            "Usage: py -3 scripts/sync-product-catalog.py <path-to-catalog.xlsx>\n"
+            "Example: py -3 scripts/sync-product-catalog.py D:\\Downloads\\catalog.xlsx"
+        )
+    xlsx_path = Path(sys.argv[1]).expanduser().resolve()
+    if not xlsx_path.is_file():
+        raise SystemExit(f"File not found: {xlsx_path}")
     if CATALOG_DIR.exists():
         shutil.rmtree(CATALOG_DIR)
-    emit_ts(parse_products())
+    emit_ts(parse_products(xlsx_path))

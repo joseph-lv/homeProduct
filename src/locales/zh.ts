@@ -24,7 +24,7 @@ export default {
     slogan: '探索 Lajtulips House 的品质与美感',
     learnMore: '了解更多',
     getInTouch: '联系方式',
-    copyright: '©2026 lajtulipshouse.com 保留所有权利。',
+    copyright: '©2026 CassieHome Tools 保留所有权利。',
   },
   home: {
     intro: '欢迎来到 Lajtulips House，可前往产品页面浏览完整目录。',
@@ -79,7 +79,7 @@ export default {
   chat: {
     title: '在线咨询',
     open: '打开聊天窗口',
-    text: '您好！如有任何问题，欢迎留言，我们会通过',
+    text: '您好！如有任何问题，欢迎留言，我们会通过邮箱回复：',
     orCall: '或致电',
     message: '留言',
     messagePlaceholder: '请输入您的消息...',

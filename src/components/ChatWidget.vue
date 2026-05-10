@@ -25,11 +25,11 @@ const { t } = useI18n()
       >
         <p class="text-sm leading-relaxed text-text-primary">
           {{ t('chat.text') }}
-          <a href="mailto:sales@lajtulipshouse.com" class="text-brand-blue underline">
-            sales@lajtulipshouse.com
+          <a href="mailto:cassiezhangsmile@gmail.com" class="text-brand-blue underline">
+            cassiezhangsmile@gmail.com
           </a>
-          {{ t('chat.orCall') }}
-          <a href="tel:+8618905209161" class="text-brand-blue underline">+86 18905209161</a>
+          <!-- {{ t('chat.orCall') }}
+          <a href="tel:+8618905209161" class="text-brand-blue underline">+86 18905209161</a> -->
           .
         </p>
         <label class="sr-only" for="chat-msg">{{ t('chat.message') }}</label>

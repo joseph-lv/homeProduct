@@ -24,7 +24,7 @@ export default {
     slogan: 'Discover Elegance and Quality at Lajtulips House',
     learnMore: 'Learn more',
     getInTouch: 'Get in touch',
-    copyright: '©2026 lajtulipshouse.com all right reserved.',
+    copyright: '©2026 CassieHome Tools. All rights reserved.',
   },
   home: {
     intro: 'Welcome to Lajtulips House — browse our full catalog on the products page.',
@@ -76,7 +76,7 @@ export default {
   chat: {
     title: 'Chat',
     open: 'Open chat',
-    text: 'Hi! If you have any questions, leave us a message — we reply on',
+    text: 'Hi! If you have any questions, leave us a message — we reply at',
     orCall: 'or call',
     message: 'Message',
     messagePlaceholder: 'Enter your message...',

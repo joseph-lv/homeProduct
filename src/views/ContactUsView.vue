@@ -43,14 +43,16 @@ const { t } = useI18n()
           <div class="mt-6 space-y-4 text-sm text-text-secondary">
             <div>
               <p class="text-xs uppercase tracking-wide text-text-primary">{{ t('contact.email') }}</p>
-              <a href="mailto:sales@lajtulipshouse.com" class="mt-1 inline-block hover:text-text-primary">
-                sales@lajtulipshouse.com
+              <a href="mailto:cassiezhangsmile@gmail.com" class="mt-1 inline-block hover:text-text-primary">
+                cassiezhangsmile@gmail.com
               </a>
             </div>
+            <!-- Phone / WhatsApp — enable when ready
             <div>
               <p class="text-xs uppercase tracking-wide text-text-primary">{{ t('contact.phone') }}</p>
               <a href="tel:+8618905209161" class="mt-1 inline-block hover:text-text-primary">+86 18905209161</a>
             </div>
+            -->
             <div>
               <p class="text-xs uppercase tracking-wide text-text-primary">{{ t('contact.officeHours') }}</p>
               <p class="mt-1">{{ t('contact.officeHoursValue') }}</p>

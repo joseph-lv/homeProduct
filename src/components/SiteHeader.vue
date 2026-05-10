@@ -4,8 +4,9 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { topNav, socialLinks } from '@/data/menu'
 import SocialIcon from '@/components/icons/SocialIcon.vue'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
+import BrandWordmark from '@/components/BrandWordmark.vue'
 import { useI18n } from '@/i18n'
-import logoImage from '@/assets/images/Log2.png'
+import { showConstructionNotice } from '@/composables/constructionNotice'
 
 const searchOpen = ref(false)
 const mobileOpen = ref(false)
@@ -75,13 +76,7 @@ function submitSearch() {
       <div class="absolute right-4 top-2 z-30 hidden xl:block">
         <LanguageSwitcher />
       </div>
-      <RouterLink to="/" class="shrink-0" @click="closeMobile">
-        <img
-          :src="logoImage"
-          alt="CassieHome Tools"
-          class="h-8 w-auto max-w-[min(100%,320px)] md:h-9"
-        />
-      </RouterLink>
+      <BrandWordmark class="shrink-0" @click="closeMobile" />
 
       <!-- Desktop nav -->
       <nav class="hidden flex-1 items-center justify-center xl:flex" aria-label="Main">
@@ -179,16 +174,15 @@ function submitSearch() {
 
       <div class="flex items-center gap-3">
         <ul class="m-0 list-none flex items-center gap-2 p-0 text-text-primary md:gap-2.5">
-          <li v-for="s in socialLinks" :key="s.href">
-            <a
-              :href="s.href"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex h-8 w-8 items-center justify-center rounded bg-surface-muted text-text-primary transition hover:bg-surface-border"
+          <li v-for="s in socialLinks" :key="s.icon">
+            <button
+              type="button"
+              class="flex h-8 w-8 cursor-pointer items-center justify-center rounded border-0 bg-surface-muted p-0 text-text-primary transition hover:bg-surface-border"
               :aria-label="s.label"
+              @click="showConstructionNotice()"
             >
               <SocialIcon :name="s.icon" />
-            </a>
+            </button>
           </li>
         </ul>
         <button
