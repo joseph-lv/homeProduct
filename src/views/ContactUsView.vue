@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import SiteHeader from '@/components/SiteHeader.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
@@ -6,6 +7,49 @@ import { useI18n } from '@/i18n'
 import productsBg from '@/assets/images/products.png'
 
 const { t } = useI18n()
+
+const contactApiUrl = (import.meta.env.VITE_CONTACT_API_URL ?? '').trim()
+
+const name = ref('')
+const company = ref('')
+const email = ref('')
+const message = ref('')
+const submitting = ref(false)
+const status = ref<'idle' | 'success' | 'error'>('idle')
+
+const apiConfigured = computed(() => Boolean(contactApiUrl))
+
+async function onSubmit() {
+  if (!apiConfigured.value) return
+  submitting.value = true
+  status.value = 'idle'
+  try {
+    const res = await fetch(contactApiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name.value.trim(),
+        company: company.value.trim(),
+        email: email.value.trim(),
+        message: message.value.trim(),
+      }),
+    })
+    const data = (await res.json().catch(() => ({}))) as { ok?: boolean }
+    if (!res.ok || !data.ok) {
+      status.value = 'error'
+      return
+    }
+    status.value = 'success'
+    name.value = ''
+    company.value = ''
+    email.value = ''
+    message.value = ''
+  } catch {
+    status.value = 'error'
+  } finally {
+    submitting.value = false
+  }
+}
 </script>
 
 <template>
@@ -62,46 +106,89 @@ const { t } = useI18n()
 
         <div class="rounded-xl border border-surface-border bg-white p-6">
           <h2 class="text-xl font-semibold text-text-primary">{{ t('contact.formTitle') }}</h2>
-          <form class="mt-5 grid gap-4" @submit.prevent>
+
+          <p v-if="!apiConfigured" class="mt-3 text-sm leading-relaxed text-amber-900/90">
+            {{ t('contact.formNotConfigured') }}
+          </p>
+
+          <p
+            v-else-if="status === 'success'"
+            class="mt-3 text-sm font-medium text-green-800"
+            role="status"
+          >
+            {{ t('contact.sent') }}
+          </p>
+          <p
+            v-else-if="status === 'error'"
+            class="mt-3 text-sm font-medium text-red-800"
+            role="alert"
+          >
+            {{ t('contact.sendFailed') }}
+          </p>
+
+          <form class="mt-5 grid gap-4" @submit.prevent="onSubmit">
             <div class="grid gap-4 sm:grid-cols-2">
               <label class="text-sm text-text-secondary">
                 {{ t('contact.name') }}
                 <input
+                  v-model="name"
+                  name="name"
                   type="text"
+                  required
+                  maxlength="200"
+                  autocomplete="name"
+                  :disabled="submitting || !apiConfigured"
                   :placeholder="t('contact.yourName')"
-                  class="mt-1 w-full rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none"
+                  class="mt-1 w-full rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none disabled:opacity-60"
                 />
               </label>
               <label class="text-sm text-text-secondary">
                 {{ t('contact.company') }}
                 <input
+                  v-model="company"
+                  name="company"
                   type="text"
+                  maxlength="200"
+                  autocomplete="organization"
+                  :disabled="submitting || !apiConfigured"
                   :placeholder="t('contact.companyName')"
-                  class="mt-1 w-full rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none"
+                  class="mt-1 w-full rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none disabled:opacity-60"
                 />
               </label>
             </div>
             <label class="text-sm text-text-secondary">
               {{ t('contact.email') }}
               <input
+                v-model="email"
+                name="email"
                 type="email"
+                required
+                maxlength="320"
+                autocomplete="email"
+                :disabled="submitting || !apiConfigured"
                 :placeholder="t('contact.yourEmail')"
-                class="mt-1 w-full rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none"
+                class="mt-1 w-full rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none disabled:opacity-60"
               />
             </label>
             <label class="text-sm text-text-secondary">
               {{ t('contact.message') }}
               <textarea
+                v-model="message"
+                name="message"
                 rows="6"
+                required
+                maxlength="20000"
+                :disabled="submitting || !apiConfigured"
                 :placeholder="t('contact.messagePlaceholder')"
-                class="mt-1 w-full resize-y rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none"
+                class="mt-1 w-full resize-y rounded border border-[#9b9b9b] px-3 py-2 text-sm outline-none disabled:opacity-60"
               />
             </label>
             <button
               type="submit"
-              class="inline-flex w-fit items-center rounded bg-text-primary px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90"
+              :disabled="submitting || !apiConfigured"
+              class="inline-flex w-fit items-center rounded bg-text-primary px-6 py-2.5 text-sm font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {{ t('contact.submit') }}
+              {{ submitting ? t('contact.submitting') : t('contact.submit') }}
             </button>
           </form>
         </div>

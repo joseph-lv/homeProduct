@@ -75,6 +75,10 @@ export default {
     yourEmail: '请输入邮箱',
     messagePlaceholder: '请描述您的产品需求...',
     submit: '提交询盘',
+    submitting: '发送中…',
+    sent: '已收到您的留言，我们会尽快回复。',
+    sendFailed: '发送失败，请稍后重试或直接发邮件联系我们。',
+    formNotConfigured: '在线表单尚未连接服务器，请直接发送邮件至 cassiezhangsmile@gmail.com。',
   },
   chat: {
     title: '在线咨询',

@@ -72,6 +72,11 @@ export default {
     yourEmail: 'you@example.com',
     messagePlaceholder: 'Tell us your product requirements...',
     submit: 'Submit Inquiry',
+    submitting: 'Sending…',
+    sent: 'Thank you! We have received your message and will reply soon.',
+    sendFailed: 'Could not send. Please try again or email us directly.',
+    formNotConfigured:
+      'This form is not connected to the server yet. Please email cassiezhangsmile@gmail.com directly.',
   },
   chat: {
     title: 'Chat',
