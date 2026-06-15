@@ -4,6 +4,7 @@ import SiteHeader from '@/components/SiteHeader.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 import { useI18n } from '@/i18n'
 import productsBg from '@/assets/images/products.png'
+import aboutUs from '@/assets/images/aboutUs.png'
 
 const { t } = useI18n()
 </script>
@@ -48,6 +49,7 @@ const { t } = useI18n()
           {{ t('about.p4') }}
         </p>
       </section>
+      <div :style="{ backgroundImage: `url(${aboutUs})` }"> </div>
     </main>
 
     <SiteFooter />

@@ -8,9 +8,9 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <footer id="site-footer" class="mt-16 border-t border-surface-border bg-white">
-    <div class="h-px w-full bg-surface-border" />
-    <div class="mx-auto max-w-7xl px-4 py-12 md:px-6 lg:px-8">
+  <footer id="site-footer" class="border-t">
+    <div class="h-px w-full" />
+    <div class="mx-auto max-w-7xl px-4 pb-12 pt-10px md:px-6 lg:px-8">
       <div class="grid gap-10 md:grid-cols-3">
         <div>
           <BrandWordmark variant="footer" class="inline-block" />

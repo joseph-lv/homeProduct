@@ -13,14 +13,13 @@ const heading = computed(() => props.title || t('common.allProducts'))
 
 <template>
   <section
-    class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-stone-800 md:min-h-[260px]"
+    class="relative flex min-h-[200px] items-center justify-center overflow-hidden md:min-h-[260px]"
     aria-label="Page heading"
   >
     <div
       class="absolute inset-0 bg-cover bg-center"
-      :style="{ backgroundImage: `url(${productsBg})` }"
     />
-    <div class="absolute inset-0 bg-black/35 backdrop-blur-[2px]" />
+    <div class="absolute inset-0 backdrop-blur-[2px]" />
     <h1
       class="relative z-10 px-4 text-center text-3xl font-semibold tracking-wide text-white md:text-4xl"
     >
