@@ -65,7 +65,7 @@ export default {
     email: '邮箱',
     phone: '电话 / WhatsApp',
     officeHours: '工作时间',
-    officeHoursValue: '周一至周六 9:00 - 18:00（GMT+8）',
+    officeHoursValue: '周一至周日（24 小时内回复）',
     formTitle: '发送消息',
     name: '姓名',
     company: '公司',

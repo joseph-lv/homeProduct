@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useI18n } from '@/i18n'
-import productsBg from '@/assets/images/products.png'
+// import productsBg from '@/assets/images/products.png'
 
 const { t } = useI18n()
 const props = defineProps<{

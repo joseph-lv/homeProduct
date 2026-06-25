@@ -84,23 +84,18 @@ async function onSubmit() {
             {{ t('contact.intro') }}
           </p>
 
-          <div class="mt-6 space-y-4 text-sm text-text-secondary">
-            <div>
-              <p class="text-xs uppercase tracking-wide text-text-primary">{{ t('contact.email') }}</p>
-              <a href="mailto:cassiezhangsmile@gmail.com" class="mt-1 inline-block hover:text-text-primary">
-                cassiezhangsmile@gmail.com
+          <div class="mt-6 space-y-3 text-sm text-text-secondary">
+            <p>
+              <a href="mailto:cassiezhangsmile@gmail.com" class="hover:text-text-primary">
+                📧 cassiezhangsmile@gmail.com
               </a>
-            </div>
-            <!-- Phone / WhatsApp — enable when ready
-            <div>
-              <p class="text-xs uppercase tracking-wide text-text-primary">{{ t('contact.phone') }}</p>
-              <a href="tel:+8618905209161" class="mt-1 inline-block hover:text-text-primary">+86 18905209161</a>
-            </div>
-            -->
-            <div>
-              <p class="text-xs uppercase tracking-wide text-text-primary">{{ t('contact.officeHours') }}</p>
-              <p class="mt-1">{{ t('contact.officeHoursValue') }}</p>
-            </div>
+            </p>
+            <p>
+              <a href="tel:+8618649914849" class="hover:text-text-primary">
+                📞 +86 18649914849
+              </a>
+            </p>
+            <p>🕒 {{ t('contact.officeHoursValue') }}</p>
           </div>
         </div>
 

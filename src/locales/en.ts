@@ -23,7 +23,7 @@ export default {
   footer: {
     slogan: 'Discover quality candle-care tools at CassieHome Tools.',
     learnMore: 'Learn more',
-    getInTouch: 'Get in touch',
+    getInTouch: 'Get in Touch',
     copyright: '©2026 CassieHome Tools. All rights reserved.',
   },
   home: {
@@ -58,11 +58,11 @@ export default {
     heroTag: "LET'S TALK",
     title: 'Contact Us',
     getInTouch: 'Get in Touch',
-    intro: 'Get in Touch If you need product catalogs, quotation support, or custom packaging service, our team is ready to help. Send us your inquiry and we will get back to you within 24 hours. 📞 +86 18649914849',
+    intro: 'If you need product catalogs, quotation support, or custom packaging service, our team is ready to help. Send us your inquiry and we will get back to you within 24 hours.',
     email: 'Email',
     phone: 'Phone / WhatsApp',
     officeHours: 'Office Hours',
-    officeHoursValue: '🕒 Mon–Sun (24h reply).',
+    officeHoursValue: 'Mon–Sun (24h reply)',
     formTitle: 'Send a Message',
     name: 'Name',
     company: 'Company',

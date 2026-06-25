@@ -8,9 +8,9 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <footer id="site-footer" class="border-t">
+  <footer id="site-footer" class="border-t pt-160px">
     <div class="h-px w-full" />
-    <div class="mx-auto max-w-7xl px-4 pb-12 pt-10px md:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 pb-12px pt-10px md:px-6 lg:px-8">
       <div class="grid gap-10 md:grid-cols-3">
         <div>
           <BrandWordmark variant="footer" class="inline-block" />
@@ -132,7 +132,7 @@ const { t } = useI18n()
         </div>
       </div>
     </div>
-    <div class="border-t border-surface-border py-6 text-center text-xs text-text-secondary">
+    <div class="border-t border-surface-border py-6px text-center text-xs text-text-secondary">
       {{ t('footer.copyright') }}
     </div>
   </footer>
