@@ -20,10 +20,10 @@ const heading = computed(() => props.title || t('common.allProducts'))
       class="absolute inset-0 bg-cover bg-center"
     />
     <div class="absolute inset-0 backdrop-blur-[2px]" />
-    <h1
+    <!-- <h1
       class="relative z-10 px-4 text-center text-3xl font-semibold tracking-wide text-white md:text-4xl"
     >
       {{ heading }}
-    </h1>
+    </h1> -->
   </section>
 </template>

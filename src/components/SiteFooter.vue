@@ -4,12 +4,28 @@ import BrandWordmark from '@/components/BrandWordmark.vue'
 import { useI18n } from '@/i18n'
 import { showConstructionNotice } from '@/composables/constructionNotice'
 
+defineProps<{
+  showHomeIntro?: boolean
+}>()
+
 const { t } = useI18n()
 </script>
 
 <template>
-  <footer id="site-footer" class="border-t pt-160px">
-    <div class="h-px w-full" />
+  <footer id="site-footer" class="border-t">
+    <div v-if="showHomeIntro" id="main" class="mx-auto max-w-7xl px-4 pb-12px pt-12px md:px-6 lg:px-8">
+      <p class="text-center text-lg text-text-secondary">
+        {{ t('home.intro') }}
+      </p>
+      <div class="mt-8 flex justify-center">
+        <RouterLink
+          to="/products"
+          class="inline-flex rounded bg-text-primary px-6 py-3 text-sm font-medium text-white no-underline hover:opacity-90"
+        >
+          {{ t('home.cta') }}
+        </RouterLink>
+      </div>
+    </div>
     <div class="mx-auto max-w-7xl px-4 pb-12px pt-10px md:px-6 lg:px-8">
       <div class="grid gap-10 md:grid-cols-3">
         <div>

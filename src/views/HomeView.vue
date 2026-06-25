@@ -5,10 +5,6 @@ import SiteFooter from '@/components/SiteFooter.vue'
 import ProductsHero from '@/components/ProductsHero.vue'
 import home3 from '@/assets/images/home3.png'
 import home4 from '@/assets/images/home4.png'
-import { RouterLink } from 'vue-router'
-import { useI18n } from '@/i18n'
-
-const { t } = useI18n()
 
 const heroImages = [home3, home4]
 const activeIndex = ref(0)
@@ -45,21 +41,8 @@ onUnmounted(() => {
       </div>
       <div class="relative">
         <ProductsHero />
-        <main id="main" class="mx-auto max-w-7xl px-4 py-12 md:px-6 lg:px-8">
-          <p class="text-center text-lg text-text-secondary">
-            {{ t('home.intro') }}
-          </p>
-          <div class="mt-8 flex justify-center">
-            <RouterLink
-              to="/products"
-              class="inline-flex rounded bg-text-primary px-6 py-3 text-sm font-medium text-white no-underline hover:opacity-90"
-            >
-              {{ t('home.cta') }}
-            </RouterLink>
-          </div>
-        </main>
       </div>
     </div>
-    <SiteFooter />
+    <SiteFooter show-home-intro />
   </div>
 </template>
